@@ -1,0 +1,43 @@
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+type Viagem struct {
+	Origem  string
+	Destino string
+	Data    string
+	Preço   float64
+}
+
+func ViagemMaisCara(viagens []Viagem) Viagem {
+	var viagemMaisCara Viagem
+	preçoMaisAlto := math.Inf(-1)
+
+	for _, viagem := range viagens {
+		if viagem.Preço > preçoMaisAlto {
+			preçoMaisAlto = viagem.Preço
+			viagemMaisCara = viagem
+		}
+	}
+
+	return viagemMaisCara
+}
+
+func main() {
+	viagens := []Viagem{
+		{Origem: "São Paulo", Destino: "Rio de Janeiro", Data: "10/07/2023", Preço: 250.0},
+		{Origem: "Rio de Janeiro", Destino: "Florianópolis", Data: "15/08/2023", Preço: 350.0},
+		{Origem: "Florianópolis", Destino: "Porto Alegre", Data: "20/09/2023", Preço: 450.0},
+	}
+
+	viagemMaisCara := ViagemMaisCara(viagens)
+
+	fmt.Printf("Viagem mais cara:\n")
+	fmt.Printf("Origem: %s\n", viagemMaisCara.Origem)
+	fmt.Printf("Destino: %s\n", viagemMaisCara.Destino)
+	fmt.Printf("Data: %s\n", viagemMaisCara.Data)
+	fmt.Printf("Preço: R$%.2f\n", viagemMaisCara.Preço)
+}
