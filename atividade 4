@@ -1,0 +1,55 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+type Musica struct {
+	Titulo   string
+	Artista  string
+	Duracao  time.Duration
+}
+
+type Playlist struct {
+	Nome    string
+	Musicas []Musica
+}
+
+func imprimirPlaylist(p Playlist) {
+	fmt.Printf("Nome da Playlist: %s\n", p.Nome)
+
+	var duracaoTotal time.Duration
+
+	for _, musica := range p.Musicas {
+		fmt.Printf("Música: %s\n", musica.Titulo)
+		fmt.Printf("Artista: %s\n", musica.Artista)
+		fmt.Printf("Duração: %s\n\n", musica.Duracao)
+
+		duracaoTotal += musica.Duracao
+	}
+
+	fmt.Printf("Tempo Total da Playlist: %s\n", duracaoTotal)
+}
+
+func main() {
+	musicas := []Musica{
+		{
+			Titulo:  "Musica 1",
+			Artista: "Artista 1",
+			Duracao: 3 * time.Minute,
+		},
+		{
+			Titulo:  "Musica 2",
+			Artista: "Artista 2",
+			Duracao: 4 * time.Minute,
+		},
+	}
+
+	playlist := Playlist{
+		Nome:    "Minha Playlist",
+		Musicas: musicas,
+	}
+
+	imprimirPlaylist(playlist)
+}
